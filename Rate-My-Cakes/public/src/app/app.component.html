@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate my cakes</title>
+
+</head>
+<body>
+  
+<div>
+
+  <form (submit) = "submitCake()">
+
+    <h2>Baker Name:</h2>
+
+
+    <p><input name="baker" [(ngModel)]="newCake.baker"></p>
+    <h2>Image url:</h2>
+    <p><input name="image" [(ngModel)]="newCake.image"></p>
+
+
+    <p><input type="submit" value="Submit"></p>
+  </form>
+</div>
+  
+  <div>
+
+    <table>
+      <thead>
+        <tr>
+
+
+
+          <th>Name:</th>
+
+          <th>Cake:</th>
+          <th>Type comment:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of cakes">
+
+
+          <td>{{x.baker}}</td>
+          <td><button (click)="cakeToShow(x)"><img src ="{{x.image}}"></button></td>
+
+          <td>
+
+            <form (submit)="postRating(x._id)" method="POST">
+            <textarea name="comment" [(ngModel)]="newRating.comment"></textarea>
+            <select name="rating" [(ngModel)]="newRating.rating">
+                <option value="1">1 star</option>
+                <option value="2">2 stars</option>
+
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+
+                <option value="5">5 stars</option>
+            </select>
+            <input type="submit" value="Rate!">
+      </form>
+
+    </td>
+    </tr>
+
+  </tbody>
+  </table>
+  <hr>
+</div>
+
+
+    <app-details *ngIf="cake" [cakeToShow]="cake" [avgRating]="avg" ></app-details>
+</body>
+
+</html>
